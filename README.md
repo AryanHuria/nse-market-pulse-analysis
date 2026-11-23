@@ -9,7 +9,7 @@ High-volume trading days show significantly lower delivery percentages than typi
 This is a correlational finding, not a causal one — both high volume and low delivery could be driven by a shared underlying factor (e.g., interest in low-priced, volatile stocks), rather than volume directly causing lower delivery.
 
 ## Dashboard
-![NSE Market Pulse Dashboard](screenshots/dashboard.png)
+<img width="1155" height="655" alt="Screenshot 2026-11-21 110141" src="https://github.com/user-attachments/assets/81bc7270-eca9-42bf-8232-f873b15e472c" />
 
 An interactive Power BI dashboard (`nse_market_pulse_dashboard.pbix`) built on top of the SQLite database, featuring:
 - KPI cards summarizing stocks tracked, average delivery %, and bulk deals recorded
@@ -91,13 +91,6 @@ The first three scripts download the last ~30 days of data (skipping weekends an
 - **Financial results filings**: `nseindia.com/api/integrated-filing-results` (NSE's current Integrated Filing system, replacing an older `corporates-financial-results` endpoint found to be stale/deprecated; provides filing metadata only — actual revenue/profit/EPS figures are embedded in linked XBRL/iXBRL documents, which are out of scope for this project)
 
 All sources require no API key, just a browser-like session with valid cookies (and in some cases a valid `Referer` header). NSE's bulk deals endpoint additionally sits behind bot-detection on at least one alternate URL pattern that was tested and abandoned in favor of the working endpoint above. NSE has changed file formats/URLs before and may again — the download logic may need updates if that happens.
-
-## Roadmap
-- [ ] Extend statistical analysis to bulk deals and FII/DII (e.g., does bulk deal activity coincide with delivery spikes?)
-- [ ] Add corporate financial results and shareholding pattern data
-- [ ] Deploy dashboard as a live shareable link (Streamlit or Power BI Service)
-- [ ] Migrate from SQLite to MySQL for a proper client-server database setup
-- [ ] Shareholding pattern data — investigated (`nseindia.com/api/corporate-share-holdings-master`); real promoter/public % data confirmed available, but the dataset is fundamentally quarterly (not daily) and would need different date-handling logic than the rest of this project's daily time-series tables. Deferred as a lower-priority addition.
 
 ## Limitations
 - Data reflects market-wide aggregate activity per stock per day, not per-broker or per-counterparty detail
